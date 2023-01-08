@@ -35,7 +35,7 @@ try {
   save(DEFAULT)
 }
 
-const newId = () => generateId(Object.keys(all))
+const newId = () => generateId(Object.keys(database.all))
 
 const generateId = taken => {
   let id = crypto.randomUUID()

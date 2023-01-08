@@ -21,3 +21,7 @@ const request = async (endpoint, method, body = {}) => {
 export const get = async () => {
   return await request('/categories', 'GET')
 }
+
+export const add = async transaction => {
+  return await request('/transaction', 'POST', transaction)
+}

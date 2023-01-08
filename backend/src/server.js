@@ -29,8 +29,10 @@ const catchErrors = fn => async (req, res) => {
     save()
   } catch (err) {
     if (err instanceof InputError) {
+      console.log(err.message)
       res.status(400).send({ error: err.message })
     } else if (err instanceof AccessError) {
+      console.log(err.message)
       res.status(403).send({ error: err.message })
     } else {
       console.log(err)
@@ -64,8 +66,7 @@ app.get(
 app.post(
   '/transaction',
   catchErrors(async (req, res) => {
-    const { title, description, category, type, item, amount, date } =
-      req.params
+    const { title, description, category, type, item, amount, date } = req.body
     return res
       .status(200)
       .json(

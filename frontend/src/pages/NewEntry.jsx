@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { get } from '../api'
+import { add, get } from '../api'
 import Box from '../components/Box'
 import Button from '../components/Button'
 import Card from '../components/Card'
@@ -83,7 +83,15 @@ const NewEntry = () => {
       return
     try {
       const value = parseFloat(amount)
-      console.log('Adding guy')
+      const data = add({
+        title: title || 'Untitled',
+        description: desc,
+        category,
+        type,
+        item,
+        amount: value,
+        date,
+      })
       setTitle('')
       setDesc('')
       setAmount('0')
@@ -189,10 +197,7 @@ const NewEntry = () => {
                 type='date'
                 placeholder='01/01/2023'
                 value={date}
-                onChange={ev => {
-                  setDate(ev.target.value)
-                  console.log(ev.target.value)
-                }}
+                onChange={ev => setDate(ev.target.value)}
                 className='rounded-2xl border border-transparent bg-transparent p-2 px-3 text-lg text-white outline-0 focus:border-white'
               />
             </div>

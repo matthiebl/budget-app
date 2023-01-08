@@ -1,12 +1,44 @@
 {
-  "all": {},
+  "all": {
+    "07822e44-4ea8-4b87-a943-3846d0c428cd": {
+      "id": "07822e44-4ea8-4b87-a943-3846d0c428cd",
+      "title": "Untitled",
+      "description": "test",
+      "amount": 100,
+      "date": "2023-01-13",
+      "category": "expense",
+      "type": "education",
+      "item": "supplies"
+    },
+    "6c5a0c15-d01a-43d7-b757-18e86fafcd69": {
+      "id": "6c5a0c15-d01a-43d7-b757-18e86fafcd69",
+      "title": "Untitled",
+      "description": "test2",
+      "amount": -901.78,
+      "date": "2023-01-04",
+      "category": "income",
+      "type": "wages",
+      "item": "other"
+    }
+  },
   "categories": {
     "income": {
       "wages": {
         "paycheck": [],
         "scholarship": [],
         "bonus": [],
-        "other": []
+        "other": [
+          {
+            "id": "6c5a0c15-d01a-43d7-b757-18e86fafcd69",
+            "title": "Untitled",
+            "description": "test2",
+            "amount": -901.78,
+            "date": "2023-01-04",
+            "category": "income",
+            "type": "wages",
+            "item": "other"
+          }
+        ]
       },
       "investment": {
         "savings": [],
@@ -26,7 +58,18 @@
         "student": []
       },
       "education": {
-        "supplies": []
+        "supplies": [
+          {
+            "id": "07822e44-4ea8-4b87-a943-3846d0c428cd",
+            "title": "Untitled",
+            "description": "test",
+            "amount": 100,
+            "date": "2023-01-13",
+            "category": "expense",
+            "type": "education",
+            "item": "supplies"
+          }
+        ]
       },
       "entertainment": {
         "books": [],
