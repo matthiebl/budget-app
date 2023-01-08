@@ -7,6 +7,7 @@ const Select = ({
   onChange = () => {},
   className = '',
   test = true,
+  required = true,
   ...props
 }) => {
   return (
@@ -22,6 +23,7 @@ const Select = ({
           (selected === '' ? 'text-gray-400 ' : '') +
           className
         }
+        required={required}
       >
         <option disabled value=''>
           {placeholder || 'Please select an option'}
