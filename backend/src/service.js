@@ -31,6 +31,7 @@ try {
   database = JSON.parse(fs.readFileSync(DATABASE_FILE))
 } catch {
   console.log('WARNING: No database found, create a new one')
+  database = DEFAULT
   save(DEFAULT)
 }
 

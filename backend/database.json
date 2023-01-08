@@ -1,1 +1,119 @@
-{}
+{
+  "all": {},
+  "categories": {
+    "income": {
+      "wages": {
+        "paycheck": [],
+        "scholarship": [],
+        "bonus": [],
+        "other": []
+      },
+      "investment": {
+        "savings": [],
+        "interest": [],
+        "dividend": []
+      },
+      "other": {
+        "gifts": [],
+        "refund": [],
+        "other": []
+      }
+    },
+    "expense": {
+      "tax": {
+        "income": [],
+        "capital": [],
+        "student": []
+      },
+      "education": {
+        "supplies": []
+      },
+      "entertainment": {
+        "books": [],
+        "games": [],
+        "streaming": [],
+        "concerts": [],
+        "dates": [],
+        "drinks": []
+      },
+      "everyday": {
+        "groceries": [],
+        "clothes": [],
+        "food": [],
+        "grooming": []
+      },
+      "gifts": {
+        "gifts": [],
+        "charity": []
+      },
+      "health": {
+        "medical": [],
+        "fitness": []
+      },
+      "home": {
+        "rent": [],
+        "furniture": [],
+        "maintenance": [],
+        "rates": [],
+        "other": []
+      },
+      "insurance": {
+        "car": [],
+        "health": [],
+        "life": [],
+        "home": [],
+        "contents": []
+      },
+      "pets": {
+        "food": [],
+        "vet": [],
+        "supplies": [],
+        "toys": []
+      },
+      "technology": {
+        "domains": [],
+        "services": [],
+        "hardware": [],
+        "software": []
+      },
+      "transport": {
+        "fuel": [],
+        "repairs": [],
+        "registration": [],
+        "public": []
+      },
+      "holiday": {
+        "travel": [],
+        "accomodation": [],
+        "food": [],
+        "entertainment": []
+      },
+      "utilities": {
+        "mobile": [],
+        "internet": [],
+        "electricity": [],
+        "water": [],
+        "gas": [],
+        "garbage": []
+      },
+      "other": {
+        "other": []
+      }
+    },
+    "investment": {
+      "savings": {
+        "account": [],
+        "holiday": [],
+        "vehicle": [],
+        "other": []
+      },
+      "shares": {
+        "australian": [],
+        "international": []
+      },
+      "other": {
+        "other": []
+      }
+    }
+  }
+}
