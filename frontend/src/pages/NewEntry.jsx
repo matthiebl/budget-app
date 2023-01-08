@@ -173,27 +173,29 @@ const NewEntry = () => {
               />
             </div>
 
-            <input
-              type='text'
-              placeholder='$ 0'
-              value={'$ ' + amount}
-              onChange={ev => {
-                if (/^\$ -?\d*[.]?\d{0,2}$/.test(ev.target.value))
-                  setAmount(ev.target.value.slice(2))
-              }}
-              className='rounded-2xl border border-transparent bg-transparent p-2 px-3 text-lg outline-0 before:block before:content-["$"] focus:border-white'
-            />
+            <div className='flex gap-8'>
+              <input
+                type='text'
+                placeholder='$ 0'
+                value={'$ ' + amount}
+                onChange={ev => {
+                  if (/^\$ -?\d*[.]?\d{0,2}$/.test(ev.target.value))
+                    setAmount(ev.target.value.slice(2))
+                }}
+                className='rounded-2xl border border-transparent bg-transparent p-2 px-3 text-lg outline-0 before:block before:content-["$"] focus:border-white'
+              />
 
-            <input
-              type='date'
-              placeholder='01/01/2023'
-              value={date}
-              onChange={ev => {
-                setDate(ev.target.value)
-                console.log(ev.target.value)
-              }}
-              className='w-fit rounded-2xl border border-transparent bg-transparent p-2 px-3 text-lg text-white outline-0 focus:border-white'
-            />
+              <input
+                type='date'
+                placeholder='01/01/2023'
+                value={date}
+                onChange={ev => {
+                  setDate(ev.target.value)
+                  console.log(ev.target.value)
+                }}
+                className='rounded-2xl border border-transparent bg-transparent p-2 px-3 text-lg text-white outline-0 focus:border-white'
+              />
+            </div>
 
             <Button
               text={autoFill.length > 1 ? 'Next' : 'Add'}

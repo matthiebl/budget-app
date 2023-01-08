@@ -9,7 +9,7 @@ const Navigation = () => {
   return (
     <div
       aria-expanded={show}
-      className='z-20 hidden h-screen w-screen shrink-0 flex-col overflow-auto bg-gradient-to-br from-back-500 to-back-700 text-white shadow-2xl drop-shadow-2xl duration-100 aria-expanded:fixed aria-expanded:flex sm:w-48 aria-expanded:sm:static lg:w-52 xl:w-56'
+      className='top-0 z-20 hidden h-screen w-screen shrink-0 flex-col bg-gradient-to-br from-back-500 to-back-700 text-white shadow-2xl drop-shadow-2xl duration-100 aria-expanded:fixed aria-expanded:flex sm:w-48 aria-expanded:sm:sticky lg:w-52 xl:w-56'
     >
       <div className='flex h-48 w-full items-center justify-center rounded-b-2xl bg-gradient-to-br from-secondary-500 to-secondary-900 drop-shadow-2xl lg:h-52 xl:h-56'>
         <Link to={RouteData.home.path}>
