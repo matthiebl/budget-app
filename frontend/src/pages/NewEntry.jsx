@@ -227,6 +227,14 @@ const NewEntry = () => {
                 text={autoFill.length > 1 ? 'Next' : 'Add'}
                 className='w-48'
                 onClick={handleAdd}
+                disabled={
+                  fields.desc === '' ||
+                  fields.category === '' ||
+                  fields.type === '' ||
+                  fields.item === '' ||
+                  fields.amount === '' ||
+                  fields.date === ''
+                }
               />
             </div>
           </Card>
