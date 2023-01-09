@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { add, get, guessCTI } from '../api'
+import { add, deleteT, get, guessCTI } from '../api'
 import Box from '../components/Box'
 import Button from '../components/Button'
 import Card from '../components/Card'
@@ -37,6 +37,8 @@ const NewEntry = () => {
 
   const [state, setState] = useState('single')
   const [autoFill, setAutoFill] = useState([])
+  const [previous, setPrevious] = useState([])
+  const [removed, setRemoved] = useState([])
 
   const [fields, setFields] = useState(EMPTY_FIELDS)
 
@@ -69,7 +71,7 @@ const NewEntry = () => {
     setState('single')
   }
 
-  const handleAdd = ev => {
+  const handleAdd = async ev => {
     if (
       fields.desc === '' ||
       fields.category === '' ||
@@ -81,11 +83,13 @@ const NewEntry = () => {
       return
     try {
       const value = parseFloat(fields.amount)
-      const data = add({
+      const response = await add({
         ...fields,
         title: fields.title || 'Untitled',
         description: fields.desc,
       })
+      console.log(response)
+      setPrevious([response, ...previous])
       setFields(EMPTY_FIELDS)
       if (autoFill.length === 0) return
       setAutoFill([...autoFill.slice(1)])
@@ -207,7 +211,7 @@ const NewEntry = () => {
                 <Button
                   text='Skip'
                   className='w-48'
-                  color='border-alt2-500'
+                  color='border-white'
                   onClick={() => setAutoFill([...autoFill.slice(1)])}
                   variant='outlined'
                 />
@@ -217,7 +221,7 @@ const NewEntry = () => {
                 <Button
                   text='Clear'
                   className='w-48'
-                  color='border-gray-500'
+                  color='border-white'
                   onClick={() => setFields(EMPTY_FIELDS)}
                   variant='outlined'
                 />
@@ -239,6 +243,57 @@ const NewEntry = () => {
             </div>
           </Card>
         )}
+
+        {state === 'single' && previous.length > 0 && (
+          <Box className='flex items-end gap-2'>
+            <h1 className='text-2xl'>Recent Additions</h1>
+            <p className='mb-0.5 text-gray-400'>
+              ({previous.length - removed.length})
+            </p>
+          </Box>
+        )}
+
+        {state === 'single' &&
+          previous.map(prev => (
+            <Card
+              key={prev.id}
+              className={
+                'left-0 flex items-center gap-2 py-3' +
+                (removed.includes(prev.id) ? ' text-gray-500' : '')
+              }
+            >
+              <p className='w-1/6'>{'$' + prev.amount}</p>
+              <p className='w-8/12 overflow-hidden text-ellipsis whitespace-nowrap'>
+                {prev.description}
+              </p>
+              <div className='flex w-1/6 justify-end gap-2 text-right'>
+                {prev.date}
+                <button
+                  onClick={() => {
+                    deleteT(prev.id)
+                    setRemoved([...removed, prev.id])
+                  }}
+                  disabled={removed.includes(prev.id)}
+                >
+                  <svg
+                    xmlns='http://www.w3.org/2000/svg'
+                    viewBox='0 0 24 24'
+                    fill='currentColor'
+                    className={
+                      'h-6 w-6' +
+                      (removed.includes(prev.id) ? ' text-transparent' : '')
+                    }
+                  >
+                    <path
+                      fillRule='evenodd'
+                      d='M5.47 5.47a.75.75 0 011.06 0L12 10.94l5.47-5.47a.75.75 0 111.06 1.06L13.06 12l5.47 5.47a.75.75 0 11-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 01-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 010-1.06z'
+                      clipRule='evenodd'
+                    />
+                  </svg>
+                </button>
+              </div>
+            </Card>
+          ))}
 
         {state === 'multi' && (
           <>

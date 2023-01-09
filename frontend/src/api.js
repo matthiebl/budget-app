@@ -30,6 +30,10 @@ export const add = async transaction => {
   return await request('/transaction', 'POST', transaction)
 }
 
+export const deleteT = async id => {
+  return await request(`/transaction/${id}`, 'DELETE')
+}
+
 export const guessCTI = (description, amount) => {
   const words = description.split(' ')
   if (words[0] === 'Transfer') {

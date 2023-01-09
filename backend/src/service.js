@@ -2,6 +2,7 @@ import fs from 'fs'
 import AsyncLock from 'async-lock'
 import { InputError } from './errors'
 import { DEFAULT } from './default'
+import { resolve } from 'path'
 
 const lock = new AsyncLock()
 
@@ -89,13 +90,26 @@ export const postTransaction = (
       type,
       item,
     }
-    database.categories[category][type][item].push(transaction)
     database.all[id] = transaction
+    database.categories[category][type][item].push(transaction)
     resolve(transaction)
   })
 
 export const getTransaction = id =>
   resourceLock((resolve, reject) => {
     if (Object.keys(database.all).includes(id)) resolve(database.all[id])
-    else reject(new InputError('Invlid id'))
+    else reject(new InputError('Invalid ID'))
+  })
+
+export const deleteTransaction = id =>
+  resourceLock((resolve, reject) => {
+    if (!Object.keys(database.all).includes(id))
+      reject(new InputError('Invalid ID'))
+
+    const { category, type, item } = database.all[id]
+    delete database.all[id]
+    database.categories[category][type][item] = database.categories[category][
+      type
+    ][item].filter(t => t.id !== id)
+    resolve({})
   })

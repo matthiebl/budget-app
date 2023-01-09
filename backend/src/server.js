@@ -7,6 +7,7 @@ import {
   getCategories,
   getTransaction,
   postTransaction,
+  deleteTransaction,
 } from './service'
 
 import { InputError, AccessError } from './errors'
@@ -80,6 +81,14 @@ app.post(
           date
         )
       )
+  })
+)
+
+app.delete(
+  '/transaction/:id',
+  catchErrors(async (req, res) => {
+    const { id } = req.params
+    return res.status(200).json(await deleteTransaction(id))
   })
 )
 

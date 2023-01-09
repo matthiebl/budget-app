@@ -24,6 +24,7 @@ export const DEFAULT = {
         income: [],
         capital: [],
         student: [],
+        other: [],
       },
       education: {
         supplies: [],
@@ -35,6 +36,7 @@ export const DEFAULT = {
         concerts: [],
         dates: [],
         drinks: [],
+        food: [],
       },
       everyday: {
         groceries: [],
