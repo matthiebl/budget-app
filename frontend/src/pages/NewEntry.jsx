@@ -88,7 +88,6 @@ const NewEntry = () => {
         title: fields.title || 'Untitled',
         description: fields.desc,
       })
-      console.log(response)
       setPrevious([response, ...previous])
       setFields(EMPTY_FIELDS)
       if (autoFill.length === 0) return
@@ -300,9 +299,6 @@ const NewEntry = () => {
             <label
               htmlFor='upload'
               className='flex flex-grow flex-col items-center justify-center gap-5 rounded-2xl border-2 border-dashed'
-              onDrag={() => {
-                console.log('drop')
-              }}
             >
               <p className='text-6xl'>+</p>
               <p className='text-4xl'>Upload a Batch CSV</p>
