@@ -7,7 +7,7 @@ import Navigation from '../components/Navigation'
 import Table from '../components/Table'
 import BasePage from './Page'
 
-const Income = () => {
+const Expenses = () => {
   const [loading, setLoading] = useState(true)
   const [data, setData] = useState(null)
 
@@ -16,7 +16,7 @@ const Income = () => {
   useEffect(() => {
     const onLoad = async () => {
       const data = await get()
-      setData(data.income)
+      setData(data.expense)
       setLoading(false)
     }
     onLoad()
@@ -26,7 +26,7 @@ const Income = () => {
     <BasePage navigation={<Navigation />}>
       <div className='flex h-full w-full flex-col gap-4 p-10'>
         <Box>
-          <h1 className='text-4xl'>Income</h1>
+          <h1 className='text-4xl'>Expenses</h1>
         </Box>
         <div className='flex justify-evenly gap-4'>
           {views.map((v, index) => (
@@ -55,7 +55,7 @@ const Income = () => {
   )
 }
 
-export default Income
+export default Expenses
 
 const views = ['Monthly', 'Quarterly', 'Yearly']
 const headers = {

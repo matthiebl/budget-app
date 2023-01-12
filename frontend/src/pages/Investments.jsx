@@ -7,7 +7,7 @@ import Navigation from '../components/Navigation'
 import Table from '../components/Table'
 import BasePage from './Page'
 
-const Income = () => {
+const Investments = () => {
   const [loading, setLoading] = useState(true)
   const [data, setData] = useState(null)
 
@@ -16,7 +16,7 @@ const Income = () => {
   useEffect(() => {
     const onLoad = async () => {
       const data = await get()
-      setData(data.income)
+      setData(data.investment)
       setLoading(false)
     }
     onLoad()
@@ -26,7 +26,7 @@ const Income = () => {
     <BasePage navigation={<Navigation />}>
       <div className='flex h-full w-full flex-col gap-4 p-10'>
         <Box>
-          <h1 className='text-4xl'>Income</h1>
+          <h1 className='text-4xl'>Investments</h1>
         </Box>
         <div className='flex justify-evenly gap-4'>
           {views.map((v, index) => (
@@ -46,6 +46,7 @@ const Income = () => {
                 <Table
                   headers={[type, ...headers[view]]}
                   rows={formatRows(view, data[type])}
+                  flipSign
                 />
               </Card>
             ))}
@@ -55,7 +56,7 @@ const Income = () => {
   )
 }
 
-export default Income
+export default Investments
 
 const views = ['Monthly', 'Quarterly', 'Yearly']
 const headers = {
