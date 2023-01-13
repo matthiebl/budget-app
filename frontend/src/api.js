@@ -43,8 +43,24 @@ export const guessCTI = (description, amount) => {
       return { category: 'investment', type: 'savings', item: 'account' }
     return { category: 'investment', type: 'savings', item: '' }
   }
+
   if (words.includes('Salary'))
     return { category: 'income', type: 'wages', item: 'paycheck' }
+
+  if (description.includes('Anytime Fitness'))
+    return { category: 'expense', type: 'health', item: 'fitness' }
+
+  if (description.includes('SUSHI'))
+    return { category: 'expense', type: 'everyday', item: 'food' }
+
+  if (description.includes('More Telecom')) {
+    return { category: 'expense', type: 'utilities', item: 'mobile' }
+  }
+
+  if (description.includes('DOMAINS')) {
+    return { category: 'expense', type: 'technology', item: 'domains' }
+  }
+
   if (amount < 0) return { category: 'expense', type: '', item: '' }
   else return { category: 'income', type: '', item: '' }
 }

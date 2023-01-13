@@ -16,7 +16,7 @@ const Select = ({
 
       <select
         id={id}
-        value={selected}
+        value={selected.value || selected}
         onChange={onChange}
         className={
           'bg-transparent outline-0 ' +
@@ -31,8 +31,8 @@ const Select = ({
 
         {test &&
           items.map(item => (
-            <option key={crypto.randomUUID()} value={item}>
-              {item[0].toUpperCase() + item.slice(1)}
+            <option key={crypto.randomUUID()} value={item.value || item}>
+              {item.label || item[0].toUpperCase() + item.slice(1)}
             </option>
           ))}
       </select>
