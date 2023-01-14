@@ -24,7 +24,7 @@ const Investments = () => {
         <Box>
           <h1 className='text-4xl'>Investments</h1>
         </Box>
-        <DisplayTable data={data} loading={loading} />
+        <DisplayTable data={data} loading={loading} flipTableSign />
       </div>
     </BasePage>
   )
