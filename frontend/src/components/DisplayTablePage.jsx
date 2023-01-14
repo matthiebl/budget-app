@@ -11,10 +11,6 @@ const DisplayTable = ({ loading, data, flipTableSign = false }) => {
   const [view, setView] = useLocalStorage('view', 'Monthly')
   const [date, setDate] = useLocalStorage('date', YEARS_ITEMS.at(-1))
 
-  useEffect(() => {
-    console.log(date)
-  }, [date])
-
   const [selected, setSelected] = useState([])
   const [modalOpen, setModalOpen] = useState(false)
 
@@ -47,7 +43,6 @@ const DisplayTable = ({ loading, data, flipTableSign = false }) => {
           )
         })}
       </Card>
-
       <div
         aria-expanded={modalOpen}
         className='fixed top-0 left-0 z-40 hidden h-screen w-screen backdrop-blur-sm duration-100 aria-expanded:block'
@@ -149,11 +144,6 @@ const CONCAT_YEARS = [].concat(
     }))
   )
 )
-
-const currentDate = {
-  label: 'blank',
-  value: JSON.stringify({ m: new Date().getMonth(), y: currentYear }),
-}
 
 const headers = {
   Weekly: ['W1', 'W2', 'W3', 'W4', 'Total'],

@@ -25,6 +25,7 @@ const Table = ({
           <p className='w-1/12'>{row[0][0].toUpperCase() + row[0].slice(1)}</p>
           {row.slice(1).map(col => {
             const sum = col.reduce((total, t) => total + t.amount, 0)
+            const val = flipSign ? sum * -1 : sum
             return (
               <div
                 key={crypto.randomUUID()}
@@ -33,12 +34,13 @@ const Table = ({
                 <p
                   className={
                     'text-right italic ' +
-                    (sum * (flipSign ? -1 : 1) === 0 ? 'text-gray-500' : '') +
-                    (sum * (flipSign ? -1 : 1) < 0 ? 'text-alt-500' : '') +
-                    (sum * (flipSign ? -1 : 1) < -500 ? 'text-alt-900' : '')
+                    (val === 0 ? 'text-gray-500' : '') +
+                    (val < 0 ? 'text-alt-500' : '')
                   }
                 >
-                  {`$${(sum * (flipSign ? -1 : 1)).toFixed(2)}`}
+                  {val < 0
+                    ? `($${(val * -1).toFixed(2)})`
+                    : `$${val.toFixed(2)}`}
                 </p>
                 {col.length > 0 && tooltips && (
                   <button
