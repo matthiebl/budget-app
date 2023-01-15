@@ -26,16 +26,10 @@ const Navigation = () => {
           {RouteData.home.linktext}
         </Button>
         <Button
-          link={RouteData.accmain.path}
+          link={RouteData.summary.path}
           color='bg-gradient-to-br from-alt2-500 to-alt2-900'
         >
-          {RouteData.accmain.linktext}
-        </Button>
-        <Button
-          link={RouteData.accsaving.path}
-          color='bg-gradient-to-br from-alt2-500 to-alt2-900'
-        >
-          {RouteData.accsaving.linktext}
+          {RouteData.summary.linktext}
         </Button>
         <Button
           link={RouteData.income.path}

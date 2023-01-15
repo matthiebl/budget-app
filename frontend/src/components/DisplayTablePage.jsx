@@ -1,11 +1,10 @@
 import { useState } from 'react'
+import { useLocalStorage } from '../resources/hooks'
 import Button from './Button'
-import Card from './Card'
-import Table from './Table'
 import Select from './Select'
-import { useEffect } from 'react'
-import { useLocalStorage } from '../hooks'
-import CloseIcon from './CloseIcon'
+import Modal from './Modal'
+import Table from './Table'
+import Card from './Card'
 
 const DisplayTable = ({ loading, data, flipTableSign = false }) => {
   const [view, setView] = useLocalStorage('view', 'Monthly')
@@ -16,38 +15,23 @@ const DisplayTable = ({ loading, data, flipTableSign = false }) => {
 
   return (
     <>
-      <Card
-        aria-expanded={modalOpen}
-        className='fixed top-1/4 left-1/4 z-50 h-1/2 w-1/2 scale-0 overflow-y-auto duration-100 aria-expanded:scale-100'
+      <Modal
+        title={<h3 className='mb-2 text-2xl'>Transactions</h3>}
+        isOpen={modalOpen}
+        setIsOpen={setModalOpen}
       >
-        <h3 className='mb-2 text-2xl'>Transactions</h3>
-        <button
-          className='absolute top-7 right-7 rounded-2xl border border-transparent p-1 hover:border-white'
-          onClick={() => setModalOpen(false)}
-        >
-          <CloseIcon />
-        </button>
-
-        {selected.map(item => {
-          console.log(item)
-          return (
-            <div key={crypto.randomUUID()} className='my-2 flex'>
-              <p className='w-1/6'>{'$' + item.amount.toFixed(2)}</p>
-              <p className='w-8/12 overflow-hidden text-ellipsis whitespace-nowrap'>
-                {item.description}
-              </p>
-              <p className='w-1/6 overflow-hidden text-ellipsis whitespace-nowrap text-right'>
-                {item.date}
-              </p>
-            </div>
-          )
-        })}
-      </Card>
-      <div
-        aria-expanded={modalOpen}
-        className='fixed top-0 left-0 z-40 hidden h-screen w-screen backdrop-blur-sm duration-100 aria-expanded:block'
-        onClick={() => setModalOpen(false)}
-      />
+        {selected.map(item => (
+          <div key={crypto.randomUUID()} className='my-2 flex'>
+            <p className='w-1/6'>{'$' + item.amount.toFixed(2)}</p>
+            <p className='w-8/12 overflow-hidden text-ellipsis whitespace-nowrap'>
+              {item.description}
+            </p>
+            <p className='w-1/6 overflow-hidden text-ellipsis whitespace-nowrap text-right'>
+              {item.date}
+            </p>
+          </div>
+        ))}
+      </Modal>
 
       <div className='flex items-center justify-evenly gap-4'>
         {VIEWS.map((v, index) => (

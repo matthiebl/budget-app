@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { add, deleteT, get, guessCTI } from '../api'
+import { add, deleteT, get, guessCTI } from '../resources/api'
 import Box from '../components/Box'
 import Button from '../components/Button'
 import Card from '../components/Card'
@@ -66,8 +66,8 @@ const NewEntry = () => {
   const handleUpload = async file => {
     const csv = await readFile(file)
     if (!csv) return
-    const data = formatCSV(csv)
-    setAutoFill(data)
+    const entries = formatCSV(csv)
+    setAutoFill(entries)
     setState('single')
   }
 

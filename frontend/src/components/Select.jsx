@@ -31,11 +31,7 @@ const Select = ({
 
         {test &&
           items.map(item => (
-            <option
-              key={crypto.randomUUID()}
-              value={item.value || item}
-              className='text-right'
-            >
+            <option key={crypto.randomUUID()} value={item.value || item}>
               {item.label || item[0].toUpperCase() + item.slice(1)}
             </option>
           ))}

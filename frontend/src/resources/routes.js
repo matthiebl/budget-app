@@ -5,17 +5,11 @@ export const RouteData = {
     text: 'Finances',
     linktext: 'Dashboard',
   },
-  accmain: {
-    path: '/account/transaction',
-    info: 'transaction account sheet',
-    text: 'Transaction Account',
-    linktext: 'Transaction',
-  },
-  accsaving: {
-    path: '/account/saving',
-    info: 'savings account sheet',
-    text: 'Savings Account',
-    linktext: 'Savings',
+  summary: {
+    path: '/summary',
+    info: 'transaction summary',
+    text: 'Transaction Summary',
+    linktext: 'Summary',
   },
   income: {
     path: '/table/income',
@@ -30,10 +24,10 @@ export const RouteData = {
     linktext: 'Expenses',
   },
   invest: {
-    path: '/table/investments',
+    path: '/table/future',
     info: 'investments table',
-    text: 'Investments',
-    linktext: 'Investments',
+    text: 'Future',
+    linktext: 'Future',
   },
   add: {
     path: '/new-data',

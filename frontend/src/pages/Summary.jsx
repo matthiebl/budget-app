@@ -1,29 +1,31 @@
 import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { get } from '../api'
+import { get } from '../resources/api'
+import { useLocalStorage } from '../resources/hooks'
 import Box from '../components/Box'
 import Button from '../components/Button'
 import Card from '../components/Card'
 import Navigation from '../components/Navigation'
 import Select from '../components/Select'
 import Table from '../components/Table'
-import { useLocalStorage } from '../hooks'
 import BasePage from './Page'
+import Modal from '../components/Modal'
+import { RouteData } from '../resources/routes'
 
-const Transaction = () => {
+const Summary = () => {
   const [loading, setLoading] = useState(true)
   const [data, setData] = useState(null)
 
   const [view, setView] = useLocalStorage('view', 'Monthly')
   const [date, setDate] = useLocalStorage('date', YEARS_ITEMS.at(-1))
 
+  const [selected, setSelected] = useState([])
+  const [modalOpen, setModalOpen] = useState(false)
+
   useEffect(() => {
     const onLoad = async () => {
       const data = await get()
       setData(data)
       setLoading(false)
-
-      console.log(accountRows(view, JSON.parse(date.value), data))
     }
     onLoad()
   }, [])
@@ -32,8 +34,26 @@ const Transaction = () => {
     <BasePage navigation={<Navigation />}>
       <div className='flex h-full w-full flex-col gap-4 p-10'>
         <Box>
-          <h1 className='text-4xl'>Transaction Account</h1>
+          <h1 className='text-4xl'>{RouteData.summary.text}</h1>
         </Box>
+
+        <Modal
+          title={<h3 className='mb-2 text-2xl'>Transactions</h3>}
+          isOpen={modalOpen}
+          setIsOpen={setModalOpen}
+        >
+          {selected.map(item => (
+            <div key={crypto.randomUUID()} className='my-2 flex'>
+              <p className='w-1/6'>{'$' + item.amount.toFixed(2)}</p>
+              <p className='w-8/12 overflow-hidden text-ellipsis whitespace-nowrap'>
+                {item.description}
+              </p>
+              <p className='w-1/6 overflow-hidden text-ellipsis whitespace-nowrap text-right'>
+                {item.date}
+              </p>
+            </div>
+          ))}
+        </Modal>
 
         <div className='flex items-center justify-evenly gap-4'>
           {VIEWS.map((v, index) => (
@@ -77,6 +97,10 @@ const Transaction = () => {
                   }
                   rows={accountRows(view, JSON.parse(date.value), data)}
                   tooltips
+                  onClickToolTip={(ev, values) => {
+                    setSelected(values)
+                    setModalOpen(true)
+                  }}
                 />
               </Card>
 
@@ -99,6 +123,10 @@ const Transaction = () => {
                       data[category]
                     )}
                     tooltips
+                    onClickToolTip={(ev, values) => {
+                      setSelected(values)
+                      setModalOpen(true)
+                    }}
                     flipSign={category === 'Investment'}
                   />
                 </Card>
@@ -111,7 +139,7 @@ const Transaction = () => {
   )
 }
 
-export default Transaction
+export default Summary
 
 const VIEWS = ['Weekly', 'Monthly', 'Quarterly']
 const MONTHS = [
