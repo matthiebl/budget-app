@@ -56,7 +56,7 @@ export const getCategories = () =>
 
 export const getAll = () =>
   resourceLock((resolve, reject) => {
-    resolve(database.all)
+    resolve(Object.values(database.all))
   })
 
 export const postTransaction = (

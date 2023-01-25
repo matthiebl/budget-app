@@ -8,7 +8,7 @@ export const DEFAULT = {
         bonus: [],
         other: [],
       },
-      investment: {
+      future: {
         savings: [],
         interest: [],
         dividend: [],
@@ -102,7 +102,7 @@ export const DEFAULT = {
         other: [],
       },
     },
-    investment: {
+    future: {
       savings: {
         account: [],
         holiday: [],

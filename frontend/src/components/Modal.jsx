@@ -1,5 +1,6 @@
 import Card from './Card'
 import CloseIcon from './CloseIcon'
+import IconButton from './IconButton'
 
 const Modal = ({ title, content, isOpen, setIsOpen, ...props }) => {
   return (
@@ -9,12 +10,11 @@ const Modal = ({ title, content, isOpen, setIsOpen, ...props }) => {
         className='fixed top-1/4 left-1/4 z-50 h-1/2 w-1/2 scale-0 overflow-y-auto duration-100 aria-expanded:scale-100'
       >
         {title}
-        <button
-          className='absolute top-7 right-7 rounded-2xl border border-transparent p-1 hover:border-white'
+        <IconButton
+          icon={<CloseIcon />}
           onClick={() => setIsOpen(false)}
-        >
-          <CloseIcon />
-        </button>
+          className='absolute top-7 right-7'
+        />
 
         {content || props.children}
       </Card>

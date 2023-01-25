@@ -15,6 +15,12 @@ module.exports = {
           900: '#181B2B',
         },
       },
+      screens: {
+        '3xl': '1750px',
+        '4xl': '2000px',
+        '5xl': '2250px',
+        '6xl': '2500px',
+      },
     },
   },
   plugins: [],
