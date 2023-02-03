@@ -60,8 +60,8 @@ const Dashboard = () => {
           <div className='flex gap-8'>
             <Card className='py-7'>
               <p className='mb-3'>Income</p>
-              {expenseChange(all) === '' ? (
-                <p>Missing data for last month</p>
+              {incomeChange(all) === '' ? (
+                <p className='text-gray-300'>Missing data for last month</p>
               ) : (
                 <>
                   <p className='text-6xl text-primary-500'>{incomeChange(all)}</p>
@@ -72,7 +72,7 @@ const Dashboard = () => {
             <Card className='py-7'>
               <p className='mb-3'>Expenses</p>
               {expenseChange(all) === '' ? (
-                <p>Missing data for last month</p>
+                <p className='text-gray-300'>Missing data for last month</p>
               ) : (
                 <>
                   <p className='text-6xl text-alt-500'>{expenseChange(all)}</p>
@@ -118,22 +118,32 @@ const IncomeExpenseGraph = ({ transactions, rule, months = 3 }) => {
       background
     >
       {getPreviousData(transactions, months).map(month => (
-        <div key={crypto.randomUUID()} className='flex h-full w-full flex-col items-center gap-3'>
+        <div
+          key={crypto.randomUUID()}
+          className='flex h-full w-full cursor-default flex-col items-center gap-3'
+        >
           <div className='flex w-full flex-grow items-end justify-center gap-2'>
             <div className={`${month.incomeH} group flex w-20 justify-center rounded-md bg-white`}>
-              <div className='absolute z-50 h-fit scale-0 rounded-xl bg-white p-2 py-0.5 text-back-500 duration-100 group-hover:-translate-y-9 group-hover:scale-100'>
+              <div className='absolute z-50 h-fit scale-0 rounded-md bg-white p-2 py-0.5 text-back-500 duration-100 group-hover:-translate-y-9 group-hover:scale-100'>
                 {`$${month.income}`}
               </div>
               <div className='absolute z-40 h-5 w-5 rotate-45 scale-0 rounded-sm bg-white duration-100 group-hover:-translate-y-[26px] group-hover:scale-100' />
             </div>
             <div className={`${month.expenseH} group flex w-20 justify-center rounded-md bg-white`}>
-              <div className='absolute z-50 h-fit scale-0 rounded-xl bg-white p-2 py-0.5 text-back-500 duration-100 group-hover:-translate-y-9 group-hover:scale-100'>
+              <div className='absolute z-50 h-fit scale-0 rounded-md bg-white p-2 py-0.5 text-back-500 duration-100 group-hover:-translate-y-9 group-hover:scale-100'>
                 {`-$${month.expense}`}
               </div>
               <div className='absolute z-40 h-5 w-5 rotate-45 scale-0 rounded-sm bg-white duration-100 group-hover:-translate-y-[26px] group-hover:scale-100' />
             </div>
           </div>
-          <p>{month.month}</p>
+          <div className='group flex justify-center'>
+            <p className='px-2'>{month.month}</p>
+            <div className='absolute z-50 h-fit scale-0 rounded-md bg-white p-2 py-0.5 text-back-500 duration-100 group-hover:translate-y-8 group-hover:scale-100'>
+              {(month.income - month.expense < 0 ? '-' : '') +
+                `$${Math.abs(month.income - month.expense)}`}
+            </div>
+            <div className='absolute z-40 h-5 w-5 rotate-45 scale-0 rounded-sm bg-white duration-100 group-hover:translate-y-[30px] group-hover:scale-100' />
+          </div>
         </div>
       ))}
     </Card>
@@ -142,13 +152,13 @@ const IncomeExpenseGraph = ({ transactions, rule, months = 3 }) => {
 
 const incomeChange = all => {
   const data = getPreviousData(all, 2)
-  if (data[1].income === 0) return ''
+  if (parseFloat(data[1].income) === 0 || parseFloat(data[0].income) === 0) return ''
   return `${(((data[1].income - data[0].income) / data[0].income) * 100).toFixed()}%`
 }
 
 const expenseChange = all => {
   const data = getPreviousData(all, 2)
-  if (data[1].expense === 0) return ''
+  if (parseFloat(data[1].expense) === 0 || parseFloat(data[0].expense) === 0) return ''
   return `${(((data[1].expense - data[0].expense) / data[0].expense) * 100).toFixed()}%`
 }
 
